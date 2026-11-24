@@ -1,0 +1,1010 @@
+{
+  "version": 1,
+  "name": "Counter",
+  "relayDelayMultiplier": 1,
+  "components": [
+    {
+      "id": "c-317",
+      "type": "battery",
+      "x": 955,
+      "y": 51,
+      "label": "Bateria",
+      "on": false,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-323",
+      "type": "relay_spdt",
+      "x": 633,
+      "y": 382,
+      "label": "r3",
+      "on": false,
+      "energized": false,
+      "rotation": 180
+    },
+    {
+      "id": "c-325",
+      "type": "relay_spdt",
+      "x": 643,
+      "y": 568,
+      "label": "r4",
+      "on": false,
+      "energized": false,
+      "rotation": 180
+    },
+    {
+      "id": "c-326",
+      "type": "relay_spdt",
+      "x": 622,
+      "y": 285,
+      "label": "r5",
+      "on": false,
+      "energized": false,
+      "rotation": 180
+    },
+    {
+      "id": "c-327",
+      "type": "relay_spdt",
+      "x": 861,
+      "y": 481,
+      "label": "r2",
+      "on": false,
+      "energized": false,
+      "rotation": 180
+    },
+    {
+      "id": "c-330",
+      "type": "relay_spdt",
+      "x": 858,
+      "y": 290,
+      "label": "r1",
+      "on": false,
+      "energized": true,
+      "rotation": 180
+    },
+    {
+      "id": "c-340",
+      "type": "lamp",
+      "x": 651,
+      "y": 216,
+      "label": "led 1",
+      "on": false,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-345",
+      "type": "relay_spdt",
+      "x": 851,
+      "y": 393,
+      "label": "CLK-A",
+      "on": false,
+      "energized": false,
+      "rotation": 180
+    },
+    {
+      "id": "c-346",
+      "type": "relay_spdt",
+      "x": 862,
+      "y": 573,
+      "label": "CLK-B",
+      "on": false,
+      "energized": true,
+      "rotation": 180
+    },
+    {
+      "id": "c-363",
+      "type": "lamp",
+      "x": 878,
+      "y": 238,
+      "label": "led 0",
+      "on": false,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-366",
+      "type": "relay_spdt",
+      "x": 634,
+      "y": 466,
+      "label": "r6",
+      "on": false,
+      "energized": false,
+      "rotation": 180
+    },
+    {
+      "id": "c-377",
+      "type": "relay_spdt",
+      "x": 376,
+      "y": 578,
+      "label": "Relé SPDT",
+      "on": false,
+      "energized": false,
+      "rotation": 180
+    },
+    {
+      "id": "c-378",
+      "type": "relay_spdt",
+      "x": 376,
+      "y": 481,
+      "label": "Relé SPDT",
+      "on": false,
+      "energized": false,
+      "rotation": 180
+    },
+    {
+      "id": "c-379",
+      "type": "relay_spdt",
+      "x": 368,
+      "y": 398,
+      "label": "Relé SPDT",
+      "on": false,
+      "energized": false,
+      "rotation": 180
+    },
+    {
+      "id": "c-380",
+      "type": "relay_spdt",
+      "x": 363,
+      "y": 310,
+      "label": "Relé SPDT",
+      "on": false,
+      "energized": false,
+      "rotation": 180
+    },
+    {
+      "id": "c-381",
+      "type": "lamp",
+      "x": 397,
+      "y": 250,
+      "label": "led 2",
+      "on": false,
+      "energized": false,
+      "rotation": 180
+    },
+    {
+      "id": "c-398",
+      "type": "relay_spdt",
+      "x": 137,
+      "y": 579,
+      "label": "Relé SPDT",
+      "on": false,
+      "energized": false,
+      "rotation": 180
+    },
+    {
+      "id": "c-399",
+      "type": "relay_spdt",
+      "x": 136,
+      "y": 474,
+      "label": "Relé SPDT",
+      "on": false,
+      "energized": false,
+      "rotation": 180
+    },
+    {
+      "id": "c-400",
+      "type": "relay_spdt",
+      "x": 134,
+      "y": 392,
+      "label": "Relé SPDT",
+      "on": false,
+      "energized": false,
+      "rotation": 180
+    },
+    {
+      "id": "c-401",
+      "type": "relay_spdt",
+      "x": 137,
+      "y": 304,
+      "label": "Relé SPDT",
+      "on": false,
+      "energized": false,
+      "rotation": 180
+    },
+    {
+      "id": "c-402",
+      "type": "lamp",
+      "x": 154,
+      "y": 235,
+      "label": "led 3",
+      "on": false,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-418",
+      "type": "clock",
+      "x": 527,
+      "y": 134,
+      "label": "Clock",
+      "on": false,
+      "energized": false,
+      "rotation": 0,
+      "intervalMs": 400
+    }
+  ],
+  "wires": [
+    {
+      "id": "w-331",
+      "from": {
+        "id": "c-317",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-330",
+        "side": "A1"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-332",
+      "from": {
+        "id": "c-317",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-327",
+        "side": "A1"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-333",
+      "from": {
+        "id": "c-317",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-323",
+        "side": "A1"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-335",
+      "from": {
+        "id": "c-317",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-326",
+        "side": "A1"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-336",
+      "from": {
+        "id": "c-317",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-325",
+        "side": "A1"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-342",
+      "from": {
+        "id": "c-340",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-317",
+        "side": "left"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-351",
+      "from": {
+        "id": "c-345",
+        "side": "A2"
+      },
+      "to": {
+        "id": "c-317",
+        "side": "left"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-352",
+      "from": {
+        "id": "c-317",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-346",
+        "side": "A2"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-353",
+      "from": {
+        "id": "c-345",
+        "side": "COM"
+      },
+      "to": {
+        "id": "c-330",
+        "side": "A2"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-354",
+      "from": {
+        "id": "c-345",
+        "side": "NO"
+      },
+      "to": {
+        "id": "c-327",
+        "side": "NC"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-355",
+      "from": {
+        "id": "c-345",
+        "side": "NC"
+      },
+      "to": {
+        "id": "c-330",
+        "side": "NO"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-356",
+      "from": {
+        "id": "c-346",
+        "side": "COM"
+      },
+      "to": {
+        "id": "c-327",
+        "side": "A2"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-357",
+      "from": {
+        "id": "c-346",
+        "side": "NO"
+      },
+      "to": {
+        "id": "c-327",
+        "side": "NO"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-358",
+      "from": {
+        "id": "c-346",
+        "side": "NC"
+      },
+      "to": {
+        "id": "c-330",
+        "side": "NO"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-359",
+      "from": {
+        "id": "c-330",
+        "side": "COM"
+      },
+      "to": {
+        "id": "c-317",
+        "side": "right"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-360",
+      "from": {
+        "id": "c-327",
+        "side": "COM"
+      },
+      "to": {
+        "id": "c-317",
+        "side": "right"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-361",
+      "from": {
+        "id": "c-327",
+        "side": "NO"
+      },
+      "to": {
+        "id": "c-323",
+        "side": "A2"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-362",
+      "from": {
+        "id": "c-327",
+        "side": "NO"
+      },
+      "to": {
+        "id": "c-325",
+        "side": "A2"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-364",
+      "from": {
+        "id": "c-327",
+        "side": "NO"
+      },
+      "to": {
+        "id": "c-363",
+        "side": "left"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-365",
+      "from": {
+        "id": "c-363",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-317",
+        "side": "left"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-367",
+      "from": {
+        "id": "c-323",
+        "side": "COM"
+      },
+      "to": {
+        "id": "c-326",
+        "side": "A2"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-368",
+      "from": {
+        "id": "c-323",
+        "side": "NO"
+      },
+      "to": {
+        "id": "c-366",
+        "side": "NC"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-369",
+      "from": {
+        "id": "c-323",
+        "side": "NC"
+      },
+      "to": {
+        "id": "c-326",
+        "side": "NO"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-370",
+      "from": {
+        "id": "c-325",
+        "side": "COM"
+      },
+      "to": {
+        "id": "c-366",
+        "side": "A2"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-371",
+      "from": {
+        "id": "c-366",
+        "side": "A1"
+      },
+      "to": {
+        "id": "c-317",
+        "side": "left"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-372",
+      "from": {
+        "id": "c-325",
+        "side": "NO"
+      },
+      "to": {
+        "id": "c-366",
+        "side": "NO"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-373",
+      "from": {
+        "id": "c-325",
+        "side": "NC"
+      },
+      "to": {
+        "id": "c-326",
+        "side": "NO"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-374",
+      "from": {
+        "id": "c-326",
+        "side": "COM"
+      },
+      "to": {
+        "id": "c-317",
+        "side": "right"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-375",
+      "from": {
+        "id": "c-366",
+        "side": "COM"
+      },
+      "to": {
+        "id": "c-317",
+        "side": "right"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-376",
+      "from": {
+        "id": "c-366",
+        "side": "NO"
+      },
+      "to": {
+        "id": "c-340",
+        "side": "left"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-382",
+      "from": {
+        "id": "c-381",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-378",
+        "side": "NO"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-383",
+      "from": {
+        "id": "c-381",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-317",
+        "side": "left"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-384",
+      "from": {
+        "id": "c-380",
+        "side": "COM"
+      },
+      "to": {
+        "id": "c-317",
+        "side": "right"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-385",
+      "from": {
+        "id": "c-378",
+        "side": "COM"
+      },
+      "to": {
+        "id": "c-317",
+        "side": "right"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-386",
+      "from": {
+        "id": "c-380",
+        "side": "A2"
+      },
+      "to": {
+        "id": "c-317",
+        "side": "left"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-387",
+      "from": {
+        "id": "c-379",
+        "side": "A2"
+      },
+      "to": {
+        "id": "c-317",
+        "side": "left"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-388",
+      "from": {
+        "id": "c-378",
+        "side": "A2"
+      },
+      "to": {
+        "id": "c-317",
+        "side": "left"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-389",
+      "from": {
+        "id": "c-377",
+        "side": "A2"
+      },
+      "to": {
+        "id": "c-317",
+        "side": "left"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-390",
+      "from": {
+        "id": "c-377",
+        "side": "A1"
+      },
+      "to": {
+        "id": "c-366",
+        "side": "NO"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-391",
+      "from": {
+        "id": "c-377",
+        "side": "COM"
+      },
+      "to": {
+        "id": "c-378",
+        "side": "A1"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-392",
+      "from": {
+        "id": "c-377",
+        "side": "NC"
+      },
+      "to": {
+        "id": "c-380",
+        "side": "NO"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-393",
+      "from": {
+        "id": "c-377",
+        "side": "NO"
+      },
+      "to": {
+        "id": "c-378",
+        "side": "NO"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-394",
+      "from": {
+        "id": "c-378",
+        "side": "NC"
+      },
+      "to": {
+        "id": "c-379",
+        "side": "NO"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-395",
+      "from": {
+        "id": "c-379",
+        "side": "A1"
+      },
+      "to": {
+        "id": "c-366",
+        "side": "NO"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-396",
+      "from": {
+        "id": "c-379",
+        "side": "COM"
+      },
+      "to": {
+        "id": "c-380",
+        "side": "A1"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-397",
+      "from": {
+        "id": "c-379",
+        "side": "NC"
+      },
+      "to": {
+        "id": "c-380",
+        "side": "NO"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-403",
+      "from": {
+        "id": "c-398",
+        "side": "NC"
+      },
+      "to": {
+        "id": "c-401",
+        "side": "NO"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-404",
+      "from": {
+        "id": "c-398",
+        "side": "NO"
+      },
+      "to": {
+        "id": "c-399",
+        "side": "NO"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-405",
+      "from": {
+        "id": "c-398",
+        "side": "A2"
+      },
+      "to": {
+        "id": "c-317",
+        "side": "left"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-406",
+      "from": {
+        "id": "c-398",
+        "side": "COM"
+      },
+      "to": {
+        "id": "c-399",
+        "side": "A1"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-407",
+      "from": {
+        "id": "c-398",
+        "side": "A1"
+      },
+      "to": {
+        "id": "c-378",
+        "side": "NO"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-408",
+      "from": {
+        "id": "c-399",
+        "side": "COM"
+      },
+      "to": {
+        "id": "c-317",
+        "side": "right"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-409",
+      "from": {
+        "id": "c-399",
+        "side": "NC"
+      },
+      "to": {
+        "id": "c-400",
+        "side": "NO"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-410",
+      "from": {
+        "id": "c-399",
+        "side": "NO"
+      },
+      "to": {
+        "id": "c-402",
+        "side": "left"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-411",
+      "from": {
+        "id": "c-400",
+        "side": "NC"
+      },
+      "to": {
+        "id": "c-401",
+        "side": "NO"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-412",
+      "from": {
+        "id": "c-400",
+        "side": "A2"
+      },
+      "to": {
+        "id": "c-317",
+        "side": "left"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-413",
+      "from": {
+        "id": "c-400",
+        "side": "A1"
+      },
+      "to": {
+        "id": "c-378",
+        "side": "NO"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-414",
+      "from": {
+        "id": "c-400",
+        "side": "COM"
+      },
+      "to": {
+        "id": "c-401",
+        "side": "A1"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-415",
+      "from": {
+        "id": "c-401",
+        "side": "COM"
+      },
+      "to": {
+        "id": "c-317",
+        "side": "right"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-416",
+      "from": {
+        "id": "c-401",
+        "side": "A2"
+      },
+      "to": {
+        "id": "c-317",
+        "side": "left"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-417",
+      "from": {
+        "id": "c-402",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-317",
+        "side": "left"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-419",
+      "from": {
+        "id": "c-418",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-317",
+        "side": "right"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-420",
+      "from": {
+        "id": "c-418",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-346",
+        "side": "A1"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-421",
+      "from": {
+        "id": "c-418",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-345",
+        "side": "A1"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-422",
+      "from": {
+        "id": "c-399",
+        "side": "A2"
+      },
+      "to": {
+        "id": "c-317",
+        "side": "left"
+      },
+      "energized": true
+    }
+  ]
+}

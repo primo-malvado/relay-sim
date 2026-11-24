@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "name": "Latch memory",
+  "relayDelayMultiplier": 1,
+  "components": [
+    {
+      "id": "c-293",
+      "type": "relay_spdt",
+      "x": 452,
+      "y": 386,
+      "label": "Relé SPDT",
+      "on": false,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-300",
+      "type": "battery",
+      "x": 42,
+      "y": 210,
+      "label": "Bateria",
+      "on": false,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-306",
+      "type": "lamp",
+      "x": 672,
+      "y": 388,
+      "label": "Lâmpada",
+      "on": false,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-310",
+      "type": "push_button_nc",
+      "x": 85,
+      "y": 414,
+      "label": "reset",
+      "on": false,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-311",
+      "type": "push_button_no",
+      "x": 304,
+      "y": 425,
+      "label": "set",
+      "on": false,
+      "energized": false,
+      "rotation": 0
+    }
+  ],
+  "wires": [
+    {
+      "id": "w-304",
+      "from": {
+        "id": "c-293",
+        "side": "NO"
+      },
+      "to": {
+        "id": "c-293",
+        "side": "A1"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-307",
+      "from": {
+        "id": "c-293",
+        "side": "A2"
+      },
+      "to": {
+        "id": "c-300",
+        "side": "left"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-308",
+      "from": {
+        "id": "c-306",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-300",
+        "side": "left"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-309",
+      "from": {
+        "id": "c-306",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-293",
+        "side": "NO"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-312",
+      "from": {
+        "id": "c-310",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-311",
+        "side": "left"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-313",
+      "from": {
+        "id": "c-311",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-293",
+        "side": "A1"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-314",
+      "from": {
+        "id": "c-311",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-293",
+        "side": "COM"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-315",
+      "from": {
+        "id": "c-310",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-300",
+        "side": "right"
+      },
+      "energized": true
+    }
+  ]
+}

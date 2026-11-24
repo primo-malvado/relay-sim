@@ -1,0 +1,795 @@
+{
+  "version": 1,
+  "name": "ALU 74181",
+  "relayDelayMultiplier": 1,
+  "components": [
+    {
+      "id": "c-92",
+      "type": "battery",
+      "x": 42,
+      "y": 47,
+      "label": "Battery",
+      "on": false,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-93",
+      "type": "relay_spdt",
+      "x": 238,
+      "y": 529,
+      "label": "a = 1",
+      "on": false,
+      "energized": false,
+      "rotation": 180
+    },
+    {
+      "id": "c-94",
+      "type": "switch",
+      "x": 29,
+      "y": 524,
+      "label": "s3",
+      "on": false,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-95",
+      "type": "switch",
+      "x": 32,
+      "y": 562,
+      "label": "s2",
+      "on": false,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-96",
+      "type": "switch",
+      "x": 26,
+      "y": 614,
+      "label": "s1",
+      "on": false,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-97",
+      "type": "switch",
+      "x": 23,
+      "y": 690,
+      "label": "s0",
+      "on": true,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-98",
+      "type": "switch",
+      "x": 37,
+      "y": 384,
+      "label": "b",
+      "on": true,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-99",
+      "type": "switch",
+      "x": 163,
+      "y": 375,
+      "label": "a",
+      "on": true,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-102",
+      "type": "relay_spdt",
+      "x": 240,
+      "y": 639,
+      "label": "a = 0",
+      "on": false,
+      "energized": false,
+      "rotation": 180
+    },
+    {
+      "id": "c-121",
+      "type": "switch",
+      "x": 548,
+      "y": 350,
+      "label": "c",
+      "on": false,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-122",
+      "type": "switch",
+      "x": 548,
+      "y": 447,
+      "label": "aritmetic",
+      "on": true,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-146",
+      "type": "lamp",
+      "x": 1280,
+      "y": 458,
+      "label": "f",
+      "on": false,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-151",
+      "type": "lamp",
+      "x": 1237,
+      "y": 697,
+      "label": "c_out",
+      "on": false,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-223",
+      "type": "relay_spdt",
+      "x": 483,
+      "y": 632,
+      "label": "f(a,b)",
+      "on": false,
+      "energized": false,
+      "rotation": 180
+    },
+    {
+      "id": "c-565",
+      "type": "relay_spdt",
+      "x": 620,
+      "y": 636,
+      "label": "~(f(a,b))",
+      "on": false,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-569",
+      "type": "relay_spdt",
+      "x": 779,
+      "y": 360,
+      "label": "cInternal",
+      "on": false,
+      "energized": false,
+      "rotation": 180
+    },
+    {
+      "id": "c-596",
+      "type": "relay_spdt",
+      "x": 789,
+      "y": 633,
+      "label": "f(a,b) ^ a ",
+      "on": false,
+      "energized": false,
+      "rotation": 180
+    },
+    {
+      "id": "c-619",
+      "type": "relay_spdt",
+      "x": 1016,
+      "y": 423,
+      "label": "Relay SPDT",
+      "on": false,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-623",
+      "type": "relay_spdt",
+      "x": 1137,
+      "y": 407,
+      "label": " a ^ f(a,b) ^ cinternal",
+      "on": false,
+      "energized": false,
+      "rotation": 180
+    },
+    {
+      "id": "c-629",
+      "type": "relay_spdt",
+      "x": 761,
+      "y": 477,
+      "label": "Relay SPDT",
+      "on": false,
+      "energized": false,
+      "rotation": 180
+    },
+    {
+      "id": "c-633",
+      "type": "relay_spdt",
+      "x": 1052,
+      "y": 676,
+      "label": "Relay SPDT",
+      "on": false,
+      "energized": false,
+      "rotation": 180
+    }
+  ],
+  "wires": [
+    {
+      "id": "w-100",
+      "from": {
+        "id": "c-94",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-93",
+        "side": "NO"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-101",
+      "from": {
+        "id": "c-93",
+        "side": "NC"
+      },
+      "to": {
+        "id": "c-95",
+        "side": "right"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-103",
+      "from": {
+        "id": "c-96",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-102",
+        "side": "NO"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-104",
+      "from": {
+        "id": "c-102",
+        "side": "NC"
+      },
+      "to": {
+        "id": "c-97",
+        "side": "right"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-105",
+      "from": {
+        "id": "c-98",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-93",
+        "side": "A2"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-106",
+      "from": {
+        "id": "c-98",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-102",
+        "side": "A2"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-107",
+      "from": {
+        "id": "c-98",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-92",
+        "side": "right"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-108",
+      "from": {
+        "id": "c-99",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-92",
+        "side": "right"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-109",
+      "from": {
+        "id": "c-97",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-92",
+        "side": "right"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-110",
+      "from": {
+        "id": "c-96",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-92",
+        "side": "right"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-111",
+      "from": {
+        "id": "c-95",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-92",
+        "side": "right"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-112",
+      "from": {
+        "id": "c-94",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-92",
+        "side": "right"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-113",
+      "from": {
+        "id": "c-92",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-93",
+        "side": "A1"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-114",
+      "from": {
+        "id": "c-102",
+        "side": "A1"
+      },
+      "to": {
+        "id": "c-92",
+        "side": "left"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-155",
+      "from": {
+        "id": "c-151",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-92",
+        "side": "left"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-156",
+      "from": {
+        "id": "c-146",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-92",
+        "side": "left"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-157",
+      "from": {
+        "id": "c-122",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-92",
+        "side": "right"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-158",
+      "from": {
+        "id": "c-121",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-92",
+        "side": "right"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-224",
+      "from": {
+        "id": "c-99",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-223",
+        "side": "A1"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-225",
+      "from": {
+        "id": "c-223",
+        "side": "NO"
+      },
+      "to": {
+        "id": "c-93",
+        "side": "COM"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-230",
+      "from": {
+        "id": "c-223",
+        "side": "A2"
+      },
+      "to": {
+        "id": "c-92",
+        "side": "left"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-564",
+      "from": {
+        "id": "c-102",
+        "side": "COM"
+      },
+      "to": {
+        "id": "c-223",
+        "side": "NC"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-566",
+      "from": {
+        "id": "c-565",
+        "side": "COM"
+      },
+      "to": {
+        "id": "c-92",
+        "side": "right"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-567",
+      "from": {
+        "id": "c-565",
+        "side": "A1"
+      },
+      "to": {
+        "id": "c-223",
+        "side": "COM"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-568",
+      "from": {
+        "id": "c-565",
+        "side": "A2"
+      },
+      "to": {
+        "id": "c-92",
+        "side": "left"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-572",
+      "from": {
+        "id": "c-569",
+        "side": "A2"
+      },
+      "to": {
+        "id": "c-122",
+        "side": "right"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-573",
+      "from": {
+        "id": "c-569",
+        "side": "A1"
+      },
+      "to": {
+        "id": "c-92",
+        "side": "left"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-597",
+      "from": {
+        "id": "c-565",
+        "side": "NC"
+      },
+      "to": {
+        "id": "c-596",
+        "side": "NO"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-598",
+      "from": {
+        "id": "c-565",
+        "side": "NO"
+      },
+      "to": {
+        "id": "c-596",
+        "side": "NC"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-599",
+      "from": {
+        "id": "c-596",
+        "side": "A2"
+      },
+      "to": {
+        "id": "c-99",
+        "side": "right"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-600",
+      "from": {
+        "id": "c-596",
+        "side": "A1"
+      },
+      "to": {
+        "id": "c-92",
+        "side": "left"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-618",
+      "from": {
+        "id": "c-121",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-569",
+        "side": "NO"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-620",
+      "from": {
+        "id": "c-619",
+        "side": "COM"
+      },
+      "to": {
+        "id": "c-92",
+        "side": "right"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-621",
+      "from": {
+        "id": "c-619",
+        "side": "A1"
+      },
+      "to": {
+        "id": "c-596",
+        "side": "COM"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-622",
+      "from": {
+        "id": "c-619",
+        "side": "A2"
+      },
+      "to": {
+        "id": "c-92",
+        "side": "left"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-624",
+      "from": {
+        "id": "c-619",
+        "side": "NC"
+      },
+      "to": {
+        "id": "c-623",
+        "side": "NO"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-625",
+      "from": {
+        "id": "c-623",
+        "side": "NC"
+      },
+      "to": {
+        "id": "c-619",
+        "side": "NO"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-626",
+      "from": {
+        "id": "c-623",
+        "side": "A2"
+      },
+      "to": {
+        "id": "c-569",
+        "side": "COM"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-627",
+      "from": {
+        "id": "c-623",
+        "side": "A1"
+      },
+      "to": {
+        "id": "c-92",
+        "side": "left"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-628",
+      "from": {
+        "id": "c-146",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-623",
+        "side": "COM"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-630",
+      "from": {
+        "id": "c-629",
+        "side": "NO"
+      },
+      "to": {
+        "id": "c-122",
+        "side": "right"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-631",
+      "from": {
+        "id": "c-629",
+        "side": "A2"
+      },
+      "to": {
+        "id": "c-565",
+        "side": "NO"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-632",
+      "from": {
+        "id": "c-629",
+        "side": "A1"
+      },
+      "to": {
+        "id": "c-92",
+        "side": "left"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-634",
+      "from": {
+        "id": "c-633",
+        "side": "NO"
+      },
+      "to": {
+        "id": "c-569",
+        "side": "COM"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-635",
+      "from": {
+        "id": "c-633",
+        "side": "NC"
+      },
+      "to": {
+        "id": "c-629",
+        "side": "COM"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-636",
+      "from": {
+        "id": "c-633",
+        "side": "A1"
+      },
+      "to": {
+        "id": "c-92",
+        "side": "left"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-637",
+      "from": {
+        "id": "c-633",
+        "side": "A2"
+      },
+      "to": {
+        "id": "c-596",
+        "side": "COM"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-638",
+      "from": {
+        "id": "c-633",
+        "side": "COM"
+      },
+      "to": {
+        "id": "c-151",
+        "side": "left"
+      },
+      "energized": false
+    }
+  ]
+}

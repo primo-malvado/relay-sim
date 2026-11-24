@@ -1,0 +1,294 @@
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M3 12h4l2.2-5 4.5 10 2.2-5H21"/>
+          <circle cx="3" cy="12" r="1" fill="currentColor"/>
+          <circle cx="21" cy="12" r="1" fill="currentColor"/>
+        </svg>
+      </span>
+      <span class="brand-name">Relay Lab</span>
+    </div>
+    <nav class="top-nav" aria-label="Menu principal">
+      <button [attr.aria-expanded]="fileMenuOpen" aria-controls="file-menu" (click)="fileMenuOpen = !fileMenuOpen">File</button>
+      @if (fileMenuOpen) {
+        <div id="file-menu" class="examples-menu" role="menu">
+          <button role="menuitem" (click)="fileMenuOpen = false; newProject()">New circuit</button>
+          <button role="menuitem" (click)="fileMenuOpen = false; projectFileInput.click()">Import circuit</button>
+        </div>
+      }
+      <button aria-haspopup="menu" [attr.aria-expanded]="examplesOpen" (click)="examplesOpen = !examplesOpen">Examples</button>
+      @if (examplesOpen) {
+        <div class="examples-menu" role="menu">
+ 
+          <button role="menuitem" (click)="examplesOpen = false; fetchExample('logic-gates.json')">Logic gates</button>
+          <button role="menuitem" (click)="examplesOpen = false; fetchExample('full-adder.json')">Full adder</button>
+          <button role="menuitem" (click)="examplesOpen = false; fetchExample('alu-74181.json')">ALU 74181</button>
+          <button role="menuitem" (click)="examplesOpen = false; fetchExample('latch-memory.json')">Latch memory</button>
+          <button role="menuitem" (click)="examplesOpen = false; fetchExample('counter.json')">Counter</button>
+        </div>
+      }
+      <button (click)="showHelp()">Help</button>
+      <a class="github-link" href="https://github.com/primo-malvado/relay-sim" target="_blank" rel="noopener noreferrer">
+        GitHub
+      </a>
+    </nav>
+    <span class="top-spacer"></span>
+    <input class="project-name" aria-label="Circuit name" [value]="projectName" (input)="updateProjectName($event)">
+    <button class="top-action" title="Save and export file (Ctrl+S)" (click)="saveProject()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M5 3h12l4 4v14H3V3h2Z"/>
+        <path d="M7 3v6h10V3M7 21v-8h10v8"/>
+      </svg>
+      <span>Save</span>
+    </button>
+    <input #projectFileInput type="file" accept=".json,application/json" hidden
+      aria-label="Import circuit" (change)="importProject($event)">
+    <button class="top-action primary" [title]="running ? 'Stop simulation' : 'Start simulation'" (click)="runSimulation()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+        @if (running) {
+          <path d="M6 5h4v14H6zM14 5h4v14h-4z"/>
+        } @else {
+          <path d="M7 4.8c0-.8.9-1.3 1.6-.9l11 7.1a1.2 1.2 0 0 1 0 2L8.6 20.1c-.7.4-1.6-.1-1.6-.9V4.8Z"/>
+        }
+      </svg>
+      <span>{{ running ? 'Stop' : 'Simulate' }}</span>
+    </button>
+  </header>
+
+  <main class="main">
+    <aside class="sidebar">
+      <div class="panel-heading"><h2>Components</h2></div>
+      <p class="panel-hint">Click to add to the workbench. Drag components to position them.</p>
+      <div class="component-list">
+        @for (type of componentOrder; track type) {
+          <button class="component-option" [attr.aria-label]="'Add ' + definitions[type].name"
+            [disabled]="running" (click)="addComponent(type)">
+            <span class="component-icon" [innerHTML]="symbols[type]"></span>
+            <span>{{ definitions[type].short }}</span>
+          </button>
+        }
+      </div>
+      <div class="section-label">Tools</div>
+      <div class="tool-list">
+        <button class="tool-button" [class.active]="tool === 'select'" (click)="setTool('select')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m5 3 14 10-7 1-3 7L5 3Z"/></svg>
+          Select and move
+        </button>
+        <button class="tool-button" [class.active]="tool === 'wire'" (click)="setTool('wire')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 18c4-12 12-12 16 0"/><circle cx="4" cy="18" r="2"/><circle cx="20" cy="18" r="2"/></svg>
+          Connect terminals
+        </button>
+        <button class="tool-button" (click)="deleteSelection()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16M10 11v6m4-6v6M6 7l1 14h10l1-14M9 7V4h6v3"/></svg>
+          Delete selection
+        </button>
+      </div>
+      <div class="tip"><strong>Tip:</strong> drag between two terminals to connect them, or choose “Connect terminals” and click each one. During simulation, click a switch; hold a push button to operate it.</div>
+    </aside>
+
+    <section class="work-area" aria-label="Circuit workbench">
+      <div class="toolbar">
+        <button class="toolbar-button" [class.active]="tool === 'select'" aria-label="Select" title="Select (V)" (click)="setTool('select')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="m5 3 14 10-7 1-3 7L5 3Z"/></svg>
+        </button>
+        <button class="toolbar-button" [class.active]="tool === 'wire'" aria-label="Connect terminals" title="Connect terminals (W)" (click)="setTool('wire')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 18c4-12 12-12 16 0"/><circle cx="4" cy="18" r="2"/><circle cx="20" cy="18" r="2"/></svg>
+        </button>
+        <span class="tool-separator"></span>
+        <button class="toolbar-button" aria-label="Undo last connection" title="Undo last connection" (click)="undoWire()">↶</button>
+        <button class="toolbar-button" aria-label="Clear workbench" title="Clear workbench" (click)="clearCanvas()">⌫</button>
+        <button class="toolbar-button organize-button" title="Arrange components" (click)="arrangeComponents()">
+          Arrange
+        </button>
+        <label class="delay-control" title="Actuation: 20 ms; release: 10 ms, before applying the multiplier">
+          Delay
+          <select aria-label="Relay timing multiplier" [value]="relayDelayMultiplier"
+            (change)="setRelayDelayMultiplier($event)">
+            @for (multiplier of relayDelayMultipliers; track multiplier) {
+              <option [value]="multiplier">{{ multiplier }}×</option>
+            }
+          </select>
+        </label>
+        <span class="top-spacer"></span>
+        <button class="toolbar-button" aria-label="Reduzir zoom" (click)="changeZoom(-10)">−</button>
+        <span class="zoom-level">{{ zoom }}%</span>
+        <button class="toolbar-button" aria-label="Aumentar zoom" (click)="changeZoom(10)">+</button>
+        <button class="toolbar-button" aria-label="Enquadrar bancada" title="Enquadrar bancada" (click)="fitToView()">⛶</button>
+      </div>
+
+      <div #canvasWrap class="canvas-wrap">
+        <div #canvas class="canvas" [class.empty]="components.length === 0" [class.connect-mode]="tool === 'wire'"
+          [style.transform]="'scale(' + zoom / 100 + ')'" [style.transformOrigin]="'top left'"
+        [style.marginLeft.px]="canvasMargin" (pointerup)="onCanvasPointerUp()"
+        (pointercancel)="onCanvasPointerUp()" (click)="onCanvasClick($event)">
+          <div class="canvas-status" [class.running]="running">
+            <span class="status-dot"></span>
+            <span>{{ running ? 'Simulation running · click switches to operate them' : 'Simulation stopped' }}</span>
+          </div>
+          <svg #wireLayer class="wires" viewBox="0 0 1400 850" aria-label="Circuit connections">
+            @for (wire of wires; track wire.id) {
+              @if (!powerConnection(wire)) {
+                <path class="wire-path" [class.energized]="wire.energized" [class.selected]="isSelected('wire', wire.id)"
+                  [class.blocked]="wireBlocked(wire)" [attr.d]="wirePath(wire)" (click)="selectWire($event, wire)">
+                  @if (wireBlocked(wire)) {
+                    <title>Could not route around the components. Move them apart to improve the connection.</title>
+                  }
+                </path>
+              }
+            }
+            @if (terminalPreviewPath; as previewPath) {
+              <path class="wire-preview" [attr.d]="previewPath"></path>
+            }
+          </svg>
+          @for (item of components; track item.id) {
+            <div class="component" [class.relay-spdt]="item.type === 'relay_spdt'"
+              [class.selected]="isSelected('component', item.id)" [class.energized]="item.energized"
+              [class.switch-on]="(item.type === 'switch' || item.type === 'push_button_no' || item.type === 'push_button_nc' || item.type === 'clock') && item.on"
+              [class.lamp-on]="item.type === 'lamp' && item.energized"
+              [style.left.px]="item.x" [style.top.px]="item.y"
+              [style.transform]="'rotate(' + (item.rotation ?? 0) + 'deg) scale(' + componentScale + ')'"
+              [style.--counter-rotation]="-(item.rotation ?? 0) + 'deg'"
+              [attr.data-id]="item.id"
+              (pointerdown)="startDrag($event, item); pressPushButton($event, item)"
+              (pointerup)="releasePushButton(item)" (pointercancel)="releasePushButton(item)"
+              (click)="componentClick($event, item)">
+              <div class="component-card">
+                <div class="component-symbol" [innerHTML]="componentDrawing(item)"></div>
+                @if (item.type === 'relay_spdt') {
+                  <div class="component-label">
+                    <input class="relay-label-input" aria-label="Relay label" maxlength="32" [value]="item.label"
+                      (pointerdown)="$event.stopPropagation()" (input)="updateComponentName($event, item)">
+                    @if (item.energized) { <em>· active</em> }
+                  </div>
+                } @else {
+                  <div class="component-label">{{ item.label }} @if (item.energized) { <em>· active</em> }</div>
+                }
+              </div>
+              @for (pin of getPins(item); track pin.side) {
+                <button class="terminal absolute-terminal" [class.pending]="connectingFrom?.id === item.id && connectingFrom?.side === pin.side"
+                  [class.relay-terminal]="item.type === 'relay_spdt'" [style.left.px]="pin.x" [style.top.px]="pin.y"
+                  [attr.data-side]="pin.side" [attr.aria-label]="'Terminal ' + pin.name + ' of ' + item.label"
+                  (pointerdown)="startTerminalDrag($event, item, pin.side)"
+                  (pointerup)="finishTerminalDrag($event, item, pin.side)"
+                  (click)="handleTerminal($event, item, pin.side)"></button>
+                @if (item.type === 'battery') {
+                  <span class="power-marker source-polarity" [style.left.px]="pin.x + (pin.side === 'left' ? -25 : 25)"
+                    [style.top.px]="pin.y" [style.transform]="'translate(-50%, -50%) rotate(' + -(item.rotation ?? 0) + 'deg)'"
+                    [attr.aria-label]="pin.side === 'right' ? 'Positive terminal' : 'Negative terminal'">{{ pin.side === 'right' ? '+' : '-' }}</span>
+                }
+                @for (connection of powerConnections(item, pin.side); track connection.wire.id; let index = $index) {
+                  <button class="power-marker" [class.selected]="isSelected('wire', connection.wire.id)"
+                    [style.left.px]="pin.x + (pin.x === 0 ? -1 : 1) * (25 + index * 24)"
+                    [style.top.px]="pin.y" [style.transform]="'translate(-50%, -50%) rotate(' + -(item.rotation ?? 0) + 'deg)'"
+                    [attr.data-wire-id]="connection.wire.id"
+                    [attr.aria-label]="'Connection to the ' + (connection.polarity === '+' ? 'positive' : 'negative') + ' of ' + connection.source.label + ' at terminal ' + pin.name + ' of ' + item.label"
+                    title="Select connection to power source" (click)="selectWire($event, connection.wire)">{{ connection.polarity }}</button>
+                }
+                @if (item.type === 'relay_spdt') {
+                  <input class="terminal-label-input" [class.left-label]="pin.align === 'left-label'"
+                    [class.right-label]="pin.align === 'right-label'" [style.left.px]="pin.labelX"
+                    [style.top.px]="pin.labelY" [attr.data-pin-label]="pin.side"
+                    [attr.aria-label]="'Relay terminal ' + pin.side + ' label'" maxlength="32"
+                    [class.pin-label-outside-left]="pin.x === 0" [size]="pinLabel(item, pin).length || 2"
+                    [value]="pinLabel(item, pin)"
+                    (pointerdown)="$event.stopPropagation()"
+                    (input)="updatePinLabel($event, item, pin.side)">
+                }
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+      <footer class="canvas-footer">
+        <span>{{ components.length }} {{ components.length === 1 ? 'component' : 'components' }} ·
+          {{ wires.length }} {{ wires.length === 1 ? 'connection' : 'connections' }}</span>
+        <span class="footer-right"><span>Grid: 22 px</span><span>Relay Lab</span></span>
+      </footer>
+    </section>
+
+    <aside class="inspector">
+      <div class="inspector-header">
+        <div class="inspector-header-line"><h2>Properties</h2><span class="esc-hint">ESC</span></div>
+        @if (selectedComponent; as item) {
+          <div class="selected-type">
+            <div class="selected-icon" [innerHTML]="symbols[item.type]"></div>
+            <div><div class="selected-title">{{ definitions[item.type].name }}</div><div class="selected-subtitle">{{ item.id.toUpperCase() }}</div></div>
+          </div>
+        } @else if (selectedWire) {
+          <div class="selected-type">
+            <div class="selected-icon">
+              <svg viewBox="0 0 28 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2 19c6-14 18-14 24 0"/></svg>
+            </div>
+            <div><div class="selected-title">Connection</div><div class="selected-subtitle">Circuit wire</div></div>
+          </div>
+        }
+      </div>
+
+      <div class="inspector-body">
+        @if (selectedComponent; as item) {
+          <label class="field-label" [attr.for]="'component-name-' + item.id">Label</label>
+          <input class="text-input" [id]="'component-name-' + item.id" maxlength="32" [value]="item.label"
+            (input)="updateComponentName($event, item)">
+          <div class="property-section">
+            <h3>Specifications</h3>
+            <div class="property-row"><span>Type</span><strong>{{ definitions[item.type].name }}</strong></div>
+            <div class="property-row"><span>Position</span><strong>{{ item.x }}, {{ item.y }}</strong></div>
+            <div class="property-row"><span>Rotation</span><strong>{{ item.rotation ?? 0 }}° · R key</strong></div>
+            <div class="property-row"><span>State</span><strong>{{ item.energized ? 'Energized' : (item.type === 'switch' || item.type === 'clock') && item.on ? 'Closed' : 'De-energized' }}</strong></div>
+          </div>
+          @if (item.type === 'switch') {
+            <div class="property-section">
+              <h3>Manual control</h3>
+              <button class="state-button" [class.on]="item.on" [disabled]="!running" (click)="toggleSwitch(item)">
+                {{ item.on ? 'Close circuit · on' : 'Open circuit · off' }}
+              </button>
+            </div>
+          }
+          @if (item.type === 'clock') {
+            <div class="property-section">
+              <h3>Clock interval</h3>
+              <label class="field-label" [attr.for]="'clock-interval-' + item.id">
+                {{ item.intervalMs ?? 1000 }} ms
+              </label>
+              <input class="range-input" type="range" min="100" max="5000" step="100"
+                [id]="'clock-interval-' + item.id" [value]="item.intervalMs ?? 1000"
+                (input)="updateClockInterval($event, item)">
+              <div class="range-scale"><span>100 ms</span><span>5000 ms</span></div>
+            </div>
+          }
+          <button class="delete-button" (click)="deleteSelection()">Delete component</button>
+        } @else if (selectedWire; as wire) {
+          <div class="property-section property-section-first">
+            <h3>Connected terminals</h3>
+            <div class="property-row"><span>From</span><strong>{{ getComponent(wire.from.id)?.label }} · {{ pinName(getComponent(wire.from.id), wire.from.side) }}</strong></div>
+            <div class="property-row"><span>To</span><strong>{{ getComponent(wire.to.id)?.label }} · {{ pinName(getComponent(wire.to.id), wire.to.side) }}</strong></div>
+          </div>
+          <button class="delete-button" (click)="deleteSelection()">Delete connection</button>
+        } @else {
+          <div class="empty-selection">
+            <div class="empty-selection-icon">□</div>
+            <strong class="empty-selection-title">Nothing selected</strong><br>
+            Select a component or wire to view its properties.
+          </div>
+        }
+      </div>
+
+      <div class="circuit-summary">
+        <div class="summary-title">Circuit state <span class="sim-state" [class.on]="running">{{ running ? 'Running' : 'Stopped' }}</span></div>
+        <div class="summary-grid">
+          <div class="summary-cell"><span>Components</span><strong>{{ components.length }}</strong></div>
+          <div class="summary-cell"><span>Active relays</span><strong>{{ activeRelayCount }}</strong></div>
+          <div class="summary-cell"><span>Lit lamps</span><strong>{{ litLampCount }}</strong></div>
+          <div class="summary-cell"><span>Connections</span><strong>{{ wires.length }}</strong></div>
+        </div>
+      </div>
+      <p class="inspector-note">The simulation checks basic continuity between terminals. Saving keeps the circuit in this browser and exports an importable JSON file.</p>
+    </aside>
+  </main>
+</div>
+@if (toastMessage) {
+  <div class="toast show" role="status">{{ toastMessage }}</div>
+}

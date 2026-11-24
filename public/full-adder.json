@@ -1,0 +1,419 @@
+{
+  "version": 1,
+  "name": "Full adder",
+  "relayDelayMultiplier": 1,
+  "components": [
+    {
+      "id": "c-1",
+      "type": "battery",
+      "x": 1220,
+      "y": 62,
+      "label": "5 V",
+      "on": false,
+      "energized": false,
+      "rotation": 180
+    },
+    {
+      "id": "c-2",
+      "type": "switch",
+      "x": 12,
+      "y": 231,
+      "label": "a",
+      "on": false,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-3",
+      "type": "switch",
+      "x": 12,
+      "y": 483,
+      "label": "b",
+      "on": false,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-4",
+      "type": "switch",
+      "x": 12,
+      "y": 584,
+      "label": "c",
+      "on": false,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-5",
+      "type": "relay_spdt",
+      "x": 141,
+      "y": 342,
+      "label": "R1",
+      "on": false,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-6",
+      "type": "relay_spdt",
+      "x": 383,
+      "y": 359,
+      "label": "R2",
+      "on": false,
+      "energized": false,
+      "rotation": 180
+    },
+    {
+      "id": "c-7",
+      "type": "relay_spdt",
+      "x": 596,
+      "y": 335,
+      "label": "R3",
+      "on": false,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-8",
+      "type": "relay_spdt",
+      "x": 1000,
+      "y": 440,
+      "label": "R4",
+      "on": false,
+      "energized": false,
+      "rotation": 180
+    },
+    {
+      "id": "c-9",
+      "type": "relay_spdt",
+      "x": 838,
+      "y": 226,
+      "label": "R5",
+      "on": false,
+      "energized": true,
+      "rotation": 180
+    },
+    {
+      "id": "c-10",
+      "type": "lamp",
+      "x": 1230,
+      "y": 477,
+      "label": "sum",
+      "on": false,
+      "energized": false,
+      "rotation": 0
+    },
+    {
+      "id": "c-11",
+      "type": "lamp",
+      "x": 1241,
+      "y": 300,
+      "label": "cout",
+      "on": false,
+      "energized": false,
+      "rotation": 0
+    }
+  ],
+  "wires": [
+    {
+      "id": "w-12",
+      "from": {
+        "id": "c-1",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-2",
+        "side": "left"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-13",
+      "from": {
+        "id": "c-1",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-3",
+        "side": "left"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-14",
+      "from": {
+        "id": "c-1",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-4",
+        "side": "left"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-15",
+      "from": {
+        "id": "c-1",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-5",
+        "side": "A2"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-16",
+      "from": {
+        "id": "c-1",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-6",
+        "side": "A2"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-17",
+      "from": {
+        "id": "c-1",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-7",
+        "side": "A2"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-18",
+      "from": {
+        "id": "c-1",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-8",
+        "side": "A2"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-19",
+      "from": {
+        "id": "c-1",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-9",
+        "side": "A2"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-20",
+      "from": {
+        "id": "c-1",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-10",
+        "side": "right"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-21",
+      "from": {
+        "id": "c-1",
+        "side": "left"
+      },
+      "to": {
+        "id": "c-11",
+        "side": "right"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-22",
+      "from": {
+        "id": "c-3",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-5",
+        "side": "A1"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-23",
+      "from": {
+        "id": "c-2",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-5",
+        "side": "COM"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-24",
+      "from": {
+        "id": "c-5",
+        "side": "NC"
+      },
+      "to": {
+        "id": "c-6",
+        "side": "NO"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-25",
+      "from": {
+        "id": "c-2",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-6",
+        "side": "A1"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-26",
+      "from": {
+        "id": "c-3",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-6",
+        "side": "NC"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-27",
+      "from": {
+        "id": "c-6",
+        "side": "COM"
+      },
+      "to": {
+        "id": "c-7",
+        "side": "A1"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-28",
+      "from": {
+        "id": "c-6",
+        "side": "COM"
+      },
+      "to": {
+        "id": "c-8",
+        "side": "NC"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-29",
+      "from": {
+        "id": "c-1",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-7",
+        "side": "COM"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-30",
+      "from": {
+        "id": "c-7",
+        "side": "NC"
+      },
+      "to": {
+        "id": "c-8",
+        "side": "NO"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-31",
+      "from": {
+        "id": "c-7",
+        "side": "NC"
+      },
+      "to": {
+        "id": "c-9",
+        "side": "A1"
+      },
+      "energized": true
+    },
+    {
+      "id": "w-32",
+      "from": {
+        "id": "c-4",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-8",
+        "side": "A1"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-33",
+      "from": {
+        "id": "c-8",
+        "side": "COM"
+      },
+      "to": {
+        "id": "c-10",
+        "side": "left"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-34",
+      "from": {
+        "id": "c-4",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-9",
+        "side": "NC"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-35",
+      "from": {
+        "id": "c-2",
+        "side": "right"
+      },
+      "to": {
+        "id": "c-9",
+        "side": "NO"
+      },
+      "energized": false
+    },
+    {
+      "id": "w-36",
+      "from": {
+        "id": "c-9",
+        "side": "COM"
+      },
+      "to": {
+        "id": "c-11",
+        "side": "left"
+      },
+      "energized": false
+    }
+  ]
+}
